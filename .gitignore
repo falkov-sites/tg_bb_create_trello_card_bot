@@ -1,0 +1,23 @@
+# Виртуальное окружение
+venv/
+**/__pycache__/
+*.pyc
+
+# Среда разработки
+.idea/
+.vscode/
+
+# Системные файлы
+.DS_Store
+thumbs.db
+
+# Логи и артефакты сборки
+logs/
+*.log
+build/
+dist/
+*.egg-info/
+
+# Файлы окружения Python
+.env
+
