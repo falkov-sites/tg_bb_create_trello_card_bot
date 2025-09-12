@@ -27,7 +27,7 @@ class Config:
     ]
 
 
-# Проверка обязательных переменных окружения
+# проверка обязательных переменных окружения
 def validate_config():
     required_vars = {
         'TRELLO_API_KEY': Config.TRELLO_API_KEY,

@@ -5,8 +5,8 @@ from typing import Dict, Optional, Tuple, List
 logger = logging.getLogger(__name__)
 
 
+# парсинг сообщения и извлечение данных
 def parse_message(text: str) -> Dict[str, str]:
-    """Парсинг сообщения и извлечение данных"""
     patterns = {
         "имя карточки": r'"имя карточки":\s*"([^"]+)"',
         "дата заказа": r'"дата заказа":\s*(.+?)(?=\n|$)',
@@ -24,12 +24,12 @@ def parse_message(text: str) -> Dict[str, str]:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 value = match.group(1).strip()
-                # Для дат убираем кавычки и оставляем только дату
+                # для дат убираем кавычки и оставляем только дату
                 if key in ['дата заказа', 'крайний срок']:
                     value = value.replace('"', '').replace("'", "").split()[0]
                 data[key] = value
             else:
-                # Попробуем найти без кавычек
+                # попробуем найти без кавычек
                 alt_pattern = pattern.replace('"', '')
                 match = re.search(alt_pattern, text, re.IGNORECASE)
                 if match:
@@ -44,8 +44,8 @@ def parse_message(text: str) -> Dict[str, str]:
     return data
 
 
+# форматирование описания карточки
 def format_card_description(data: Dict[str, str]) -> str:
-    """Форматирование описания карточки"""
     description = f"""📋 **Детали заказа:**
 
 📝 **Название карточки:** {data.get('имя карточки', 'Не указано')}
@@ -58,7 +58,6 @@ def format_card_description(data: Dict[str, str]) -> str:
 📝 **Описание:** {data.get('описание', 'Не указано')}
 
 #заказ #новый_заказ"""
-
     return description
 
 
